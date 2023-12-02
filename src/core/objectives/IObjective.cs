@@ -1,6 +1,7 @@
-﻿using WWWisky.quests.core.quests;
+﻿using System;
+using WWWisky.quests.core.quests;
 
-namespace WWWisky.quests.core.contracts
+namespace WWWisky.quests.core.objectives
 {
     /// <summary>
     /// 
@@ -11,6 +12,6 @@ namespace WWWisky.quests.core.contracts
         string Name { get; }
         CompletionState CompletionState { get; }
 
-        void Start();
+        void Start(Action onCompleted);
     }
 }

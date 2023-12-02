@@ -1,5 +1,4 @@
 using System;
-using WWWisky.quests.core.contracts;
 using WWWisky.quests.core.quests;
 
 namespace WWWisky.quests.core.objectives
@@ -15,6 +14,8 @@ namespace WWWisky.quests.core.objectives
 		public string Name { get; protected set; }
 		public CompletionState CompletionState { get; private set; }
 
+        private Action _onCompleted;
+
 
         /// <summary>
         /// 
@@ -29,8 +30,9 @@ namespace WWWisky.quests.core.objectives
         }
 
 
-        public void Start()
+        public void Start(Action onCompleted)
         {
+            _onCompleted = onCompleted;
             CompletionState = CompletionState.Active;
         }
 
@@ -44,6 +46,7 @@ namespace WWWisky.quests.core.objectives
 		public void Complete()
 		{
             CompletionState = CompletionState.Completed;
+            _onCompleted();
             OnUpdated?.Invoke();
 		}
 		public void Fail()

@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using WWWisky.quests.core.contracts;
+using WWWisky.quests.core.quests;
 
-namespace WWWisky.quests.core
+namespace WWWisky.quests.core.components
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class QuestBoard
     {
         public event Action<IQuest> OnQuestAdded;
         public event Action<IQuest> OnQuestRemoved;
 
         public string Name { get; }
-        private readonly HashSet<Quest> m_QuestList;
+        private readonly List<IQuest> m_QuestList;
 
 
         public QuestBoard(string boardName)
         {
             Name = boardName;
-            m_QuestList = new HashSet<IQuest>();
+            m_QuestList = new List<IQuest>();
         }
 
 
