@@ -1,6 +1,6 @@
 bin/
-Quests/
 obj/
+.vs/
 
 *.csproj
 *.sln

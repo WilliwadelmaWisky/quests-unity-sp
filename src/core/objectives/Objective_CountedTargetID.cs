@@ -24,6 +24,7 @@ namespace WWWisky.quests.core.objectives
         /// <param name="amount"></param>
         public Objective_CountedTargetID(string id, string name, string creatureID, int amount) : base(id, name, creatureID)
         {
+			_defaultName = name;
             Total = Math.Max(amount, 1);
             Current = 0;
             UpdateName();
