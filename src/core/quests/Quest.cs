@@ -52,19 +52,11 @@ namespace WWWisky.quests.core.quests
 		/// <summary>
         /// 
         /// </summary>
-		public void Complete()
+        /// <param name="completionState"></param>
+		public void Complete(CompletionState completionState = CompletionState.Completed)
 		{
-            CompletionState = CompletionState.Completed;
+            CompletionState = completionState;
             _onCompleted();
-            OnUpdated?.Invoke();
-		}
-
-        /// <summary>
-        /// 
-        /// </summary>
-		public void Fail()
-		{
-            CompletionState = CompletionState.Failed;
             OnUpdated?.Invoke();
 		}
 	}

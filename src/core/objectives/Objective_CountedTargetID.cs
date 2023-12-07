@@ -1,6 +1,6 @@
 ﻿using System;
-using WWWisky.quests.core.contracts;
 using WWWisky.quests.core.quests;
+using WWWisky.quests.core.util;
 
 namespace WWWisky.quests.core.objectives
 {
@@ -31,6 +31,15 @@ namespace WWWisky.quests.core.objectives
         }
 
 
+        public override void Start(Action onCompleted)
+        {
+            base.Start(onCompleted);
+
+            Current = 0;
+            UpdateName();
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -56,7 +65,7 @@ namespace WWWisky.quests.core.objectives
                 return;
             }
 
-            UpdateCallback();
+            TriggerUpdateCallback();
         }
 
         /// <summary>
@@ -70,7 +79,7 @@ namespace WWWisky.quests.core.objectives
 
             Current -= Math.Min(amount, Current);
             UpdateName();
-            UpdateCallback();
+            TriggerUpdateCallback();
         }
     }
 }

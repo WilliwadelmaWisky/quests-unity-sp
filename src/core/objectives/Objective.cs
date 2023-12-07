@@ -30,28 +30,31 @@ namespace WWWisky.quests.core.objectives
         }
 
 
-        public void Start(Action onCompleted)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="onCompleted"></param>
+        public virtual void Start(Action onCompleted)
         {
             _onCompleted = onCompleted;
             CompletionState = CompletionState.Active;
         }
 
 
-        protected void UpdateCallback()
-        {
-            OnUpdated?.Invoke();
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        protected void TriggerUpdateCallback() => OnUpdated?.Invoke();
 		
 		
-		public void Complete()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="completionState"></param>
+		public void Complete(CompletionState completionState = CompletionState.Completed)
 		{
-            CompletionState = CompletionState.Completed;
+            CompletionState = completionState;
             _onCompleted();
-            OnUpdated?.Invoke();
-		}
-		public void Fail()
-		{
-            CompletionState = CompletionState.Failed;
             OnUpdated?.Invoke();
 		}
 	}
