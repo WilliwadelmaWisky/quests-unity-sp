@@ -10,7 +10,6 @@ namespace WWWisky.quests.unity.components
     public class QuestJournalMono : MonoBehaviour
     {
         private QuestJournal _questJournal;
-        private QuestHistory _questHistory;
         private QuestTracker _questTracker;
 
 
@@ -20,7 +19,6 @@ namespace WWWisky.quests.unity.components
         void Awake()
         {
             _questJournal = new QuestJournal();
-            _questHistory = new QuestHistory();
             _questTracker = new QuestTracker();
 
             _questJournal.OnQuestEnded += OnQuestEnded;
@@ -70,7 +68,6 @@ namespace WWWisky.quests.unity.components
         /// <param name="quest"></param>
         private void OnQuestEnded(IQuest quest)
         {
-            _questHistory.Add(quest);
             if (!_questTracker.IsTracking || !_questTracker.TrackedQuest.Equals(quest))
                 return;
 

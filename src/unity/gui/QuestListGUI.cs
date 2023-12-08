@@ -9,7 +9,7 @@ namespace WWWisky.quests.unity.gui
     /// </summary>
     public class QuestListGUI : MonoBehaviour
     {
-        private List<IQuestGUI> _questList;
+        private List<QuestGUI> _questList;
 
 
         /// <summary>
@@ -17,7 +17,7 @@ namespace WWWisky.quests.unity.gui
         /// </summary>
         void Awake()
         {
-            _questList = new List<IQuestGUI>();
+            _questList = new List<QuestGUI>();
         }
 
 
@@ -26,7 +26,7 @@ namespace WWWisky.quests.unity.gui
         /// </summary>
         /// <param name="quest"></param>
         /// <param name="questGUI"></param>
-        public void Add(IQuest quest, IQuestGUI questGUI)
+        public void Add(IQuest quest, QuestGUI questGUI)
         {
             questGUI.Clear();
             questGUI.Assign(quest);
@@ -39,7 +39,7 @@ namespace WWWisky.quests.unity.gui
         /// </summary>
         /// <param name="questGUI"></param>
         /// <returns></returns>
-        public IQuestGUI Remove(IQuestGUI questGUI)
+        public QuestGUI Remove(QuestGUI questGUI)
         {
             int index = _questList.FindIndex(q => q.Equals(questGUI));
             return Remove(index);
@@ -50,13 +50,14 @@ namespace WWWisky.quests.unity.gui
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public IQuestGUI Remove(int index)
+        public QuestGUI Remove(int index)
         {
             if (index < 0 || index >= _questList.Count)
                 return null;
 
-            IQuestGUI questGUI = _questList[index];
+            QuestGUI questGUI = _questList[index];
             _questList.RemoveAt(index);
+            questGUI.Clear();
             return questGUI;
         }
 
@@ -65,9 +66,9 @@ namespace WWWisky.quests.unity.gui
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<IQuestGUI> Clear()
+        public List<QuestGUI> Clear()
         {
-            List<IQuestGUI> questList = new List<IQuestGUI>(_questList);
+            List<QuestGUI> questList = new List<QuestGUI>(_questList);
             _questList.Clear();
             return questList;
         }

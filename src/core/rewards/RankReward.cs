@@ -5,7 +5,7 @@ namespace WWWisky.quests.core.rewards
     /// <summary>
     /// 
     /// </summary>
-    public class ExperienceReward : Reward
+    public class RankReward : Reward
     {
         public int Amount { get; }
 
@@ -15,7 +15,7 @@ namespace WWWisky.quests.core.rewards
         /// </summary>
         /// <param name="name"></param>
         /// <param name="amount"></param>
-        public ExperienceReward(string name, int amount) : base(name)
+        public RankReward(string name, int amount) : base(name)
         {
             Amount = amount;
         }
@@ -27,8 +27,8 @@ namespace WWWisky.quests.core.rewards
         /// <param name="target"></param>
         public override void Give(object target)
         {
-            if (target is IHasLevelSystem hasLevelSystem)
-                hasLevelSystem.GetLevelSystem().AddExperience(Amount);
+            if (target is IGuildMember guildMember)
+                guildMember.GetGuildCard().RankSystem.AddExperience(Amount);
         }
     }
 }

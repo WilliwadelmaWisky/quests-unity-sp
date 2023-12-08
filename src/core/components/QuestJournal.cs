@@ -16,6 +16,7 @@ namespace WWWisky.quests.core.components
 
 		private readonly List<IQuest> _questList;
 		private readonly HashSet<string> _questIDSet;
+		private readonly QuestHistory _history;
 
 		public int QuestCount => _questList.Count;
 		
@@ -27,6 +28,7 @@ namespace WWWisky.quests.core.components
 		{
 			_questList = new List<IQuest>();
 			_questIDSet = new HashSet<string>();
+			_history = new QuestHistory();
 		}
 		
 		
@@ -70,6 +72,8 @@ namespace WWWisky.quests.core.components
         {
 			_questList.Remove(quest);
 			_questIDSet.Remove(quest.ID);
+			_history.Add(quest);
+
 			OnQuestRemoved?.Invoke(quest);
 		}
 		

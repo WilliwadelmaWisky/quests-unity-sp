@@ -6,7 +6,7 @@ namespace WWWisky.quests.unity.gui
     /// <summary>
     /// 
     /// </summary>
-    public class QuestGUI : MonoBehaviour, IQuestGUI
+    public class QuestGUI : MonoBehaviour
     {
         public IQuest Quest { get; private set; }
 
