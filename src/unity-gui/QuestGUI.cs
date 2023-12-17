@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using WWWisky.quests.core.quests;
 
 namespace WWWisky.quests.unity.gui
@@ -6,8 +9,12 @@ namespace WWWisky.quests.unity.gui
     /// <summary>
     /// 
     /// </summary>
-    public class QuestGUI : MonoBehaviour
+    public class QuestGUI : MonoBehaviour, ICloneable, IPointerClickHandler
     {
+        public event Action OnClicked;
+
+        [SerializeField] private TextMeshProUGUI NameText;
+
         public IQuest Quest { get; private set; }
 
 
@@ -18,6 +25,7 @@ namespace WWWisky.quests.unity.gui
         public virtual void Assign(IQuest quest)
         {
             Quest = quest;
+            NameText.SetText(Quest.Name);
         }
 
 
@@ -26,7 +34,11 @@ namespace WWWisky.quests.unity.gui
         /// </summary>
         public virtual void Clear()
         {
+            if (Quest == null)
+                return;
+
             Quest = null;
+            OnClicked = null;
         }
 
 
@@ -37,6 +49,16 @@ namespace WWWisky.quests.unity.gui
         public object Clone()
         {
             return Instantiate(this);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventData"></param>
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnClicked?.Invoke();
         }
     }
 }

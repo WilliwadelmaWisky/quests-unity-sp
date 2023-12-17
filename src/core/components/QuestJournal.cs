@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using WWWisky.quests.core.quests;
 
@@ -7,7 +8,7 @@ namespace WWWisky.quests.core.components
     /// <summary>
     /// 
     /// </summary>
-    public class QuestJournal
+    public class QuestJournal : IQuestJournal
 	{
 		public event Action<IQuest> OnQuestAdded;
 		public event Action<IQuest> OnQuestRemoved;
@@ -16,7 +17,7 @@ namespace WWWisky.quests.core.components
 
 		private readonly List<IQuest> _questList;
 		private readonly HashSet<string> _questIDSet;
-		private readonly QuestHistory _history;
+        private readonly List<IQuest> _activeQuestList;
 
 		public int QuestCount => _questList.Count;
 		
@@ -28,11 +29,15 @@ namespace WWWisky.quests.core.components
 		{
 			_questList = new List<IQuest>();
 			_questIDSet = new HashSet<string>();
-			_history = new QuestHistory();
+            _activeQuestList = new List<IQuest>();
 		}
-		
-		
-		public bool Contains(IQuest quest) => _questIDSet.Contains(quest.ID);
+
+
+        public IEnumerator<IQuest> GetEnumerator() => _questList.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+
+        public bool Contains(IQuest quest) => _questIDSet.Contains(quest.ID);
 
 
 		/// <summary>
@@ -72,7 +77,6 @@ namespace WWWisky.quests.core.components
         {
 			_questList.Remove(quest);
 			_questIDSet.Remove(quest.ID);
-			_history.Add(quest);
 
 			OnQuestRemoved?.Invoke(quest);
 		}
@@ -120,5 +124,5 @@ namespace WWWisky.quests.core.components
 				EndQuest(quest);
             }
 		}
-	}
+    }
 }

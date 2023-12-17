@@ -2,7 +2,7 @@
 using WWWisky.quests.core.components;
 using WWWisky.quests.core.quests;
 
-namespace WWWisky.quests.unity.components
+namespace WWWisky.quests.unity
 {
     /// <summary>
     /// 
@@ -54,9 +54,9 @@ namespace WWWisky.quests.unity.components
             if (!_questTracker.IsTracking || !_questTracker.TrackedQuest.Equals(quest))
                 return;
 
-            _questJournal.ForEach((quest, index) =>
+            _questJournal.ForEach((q, index) =>
             {
-                _questTracker.Track(quest);
+                _questTracker.Track(q);
                 return;
             });
         }
@@ -71,9 +71,9 @@ namespace WWWisky.quests.unity.components
             if (!_questTracker.IsTracking || !_questTracker.TrackedQuest.Equals(quest))
                 return;
 
-            _questJournal.ForEach((quest, index) =>
+            _questJournal.ForEach((q, index) =>
             {
-                _questTracker.Track(quest);
+                _questTracker.Track(q);
                 return;
             });
         }

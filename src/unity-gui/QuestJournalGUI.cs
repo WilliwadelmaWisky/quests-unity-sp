@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Pool;
-using WWWisky.quests.core.components;
+using WWWisky.quests.core;
 using WWWisky.quests.core.quests;
 
 namespace WWWisky.quests.unity.gui
@@ -15,7 +16,7 @@ namespace WWWisky.quests.unity.gui
         [Header("Optional")]
         [SerializeField] private QuestCategoryGUI QuestCategory;
 
-        private QuestJournal _questJournal;
+        private IQuestJournal _questJournal;
         private IObjectPool<QuestGUI> _questPool;
 
 
@@ -24,12 +25,7 @@ namespace WWWisky.quests.unity.gui
         /// </summary>
         void Awake()
         {
-            _questPool = new ObjectPool<QuestGUI>(() => 
-            {
-                QuestGUI questGUI = (QuestGUI)QuestPrefab.Clone();
-                questGUI.transform.SetParent(QuestList.transform);
-                return questGUI;
-            });
+            _questPool = new ObjectPool<QuestGUI>(() => (QuestGUI)QuestPrefab.Clone());
         }
 
 
@@ -37,7 +33,7 @@ namespace WWWisky.quests.unity.gui
         /// 
         /// </summary>
         /// <param name="questJournal"></param>
-        public void Assign(QuestJournal questJournal)
+        public void Assign(IQuestJournal questJournal)
         {
             _questJournal = questJournal;
 
@@ -48,15 +44,18 @@ namespace WWWisky.quests.unity.gui
         /// <summary>
         /// 
         /// </summary>
-        public void Refresh()
+        public void Refresh() => Refresh(quest => true);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Refresh(Predicate<IQuest> match)
         {
             QuestList.Clear().ForEach(questGUI => _questPool.Release(questGUI));
             _questJournal.ForEach((quest, index) =>
             {
-                if (!ShowQuest(quest))
-                    return;
-
-                QuestList.Add(quest, _questPool.Get());
+                if (match(quest))
+                    AddQuest(quest, index);
             });
         }
 
@@ -65,13 +64,26 @@ namespace WWWisky.quests.unity.gui
         /// 
         /// </summary>
         /// <param name="quest"></param>
-        /// <returns></returns>
-        private bool ShowQuest(IQuest quest)
+        /// <param name="index"></param>
+        private void AddQuest(IQuest quest, int index)
         {
-            if (QuestCategory != null)
-                return QuestCategory.Match(quest);
+            QuestGUI questGUI = _questPool.Get();
+            QuestList.Add(quest, questGUI);
+            questGUI.OnClicked += () => OnQuestClicked(questGUI);
+            questGUI.transform.SetSiblingIndex(index);
+        }
 
-            return true;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="questGUI"></param>
+        private void OnQuestClicked(QuestGUI questGUI)
+        {
+            if (questGUI == null)
+                return;
+
+            Debug.Log("Click: " + questGUI.Quest.Name);
         }
     }
 }

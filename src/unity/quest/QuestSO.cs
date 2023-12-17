@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using WWWisky.quests.core.quests;
 
-namespace WWWisky.quests.unity.quests
+namespace WWWisky.quests.unity
 {
     /// <summary>
     /// 

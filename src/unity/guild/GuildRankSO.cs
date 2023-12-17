@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using WWWisky.quests.core.guild;
 
-namespace WWWisky.quests.unity.guild
+namespace WWWisky.quests.unity
 {
     /// <summary>
     /// 
@@ -14,5 +14,10 @@ namespace WWWisky.quests.unity.guild
 
         public string Name => RankName;
         public int RequiredExperience => Experience;
+
+        public bool RequirementsMet()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
