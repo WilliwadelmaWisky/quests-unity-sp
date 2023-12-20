@@ -1,6 +1,4 @@
-﻿using WWWisky.quests.core.quests;
-
-namespace WWWisky.quests.core.components
+﻿namespace WWWisky.quests.core
 {
     /// <summary>
     /// 

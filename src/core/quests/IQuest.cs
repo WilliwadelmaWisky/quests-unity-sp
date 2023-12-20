@@ -1,7 +1,6 @@
 ﻿using System;
-using WWWisky.quests.core.quests.types;
 
-namespace WWWisky.quests.core.quests
+namespace WWWisky.quests.core
 {
     /// <summary>
     /// 
@@ -10,7 +9,7 @@ namespace WWWisky.quests.core.quests
     {
         string ID { get; }
         string Name { get; }
-        IQuestType Type { get; }
+        QuestType Type { get; }
         CompletionState CompletionState { get; }
 
         void Start(Action onCompleted);

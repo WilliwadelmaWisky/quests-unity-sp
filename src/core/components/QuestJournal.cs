@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using WWWisky.quests.core.quests;
 
-namespace WWWisky.quests.core.components
+namespace WWWisky.quests.core
 {
     /// <summary>
     /// 

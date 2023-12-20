@@ -1,4 +1,4 @@
-﻿namespace WWWisky.quests.core.serialization
+﻿namespace WWWisky.quests.core
 {
     /// <summary>
     /// 

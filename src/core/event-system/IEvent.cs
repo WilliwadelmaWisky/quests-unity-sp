@@ -3,8 +3,8 @@
     /// <summary>
     /// 
     /// </summary>
-    public interface ITrackable
+    public interface IEvent
     {
-        Vector GetPosition();
+        object Source { get; }
     }
 }

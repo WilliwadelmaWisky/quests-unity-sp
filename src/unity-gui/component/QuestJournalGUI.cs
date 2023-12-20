@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.Pool;
 using WWWisky.quests.core;
-using WWWisky.quests.core.quests;
 
 namespace WWWisky.quests.unity.gui
 {

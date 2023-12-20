@@ -1,7 +1,6 @@
 using System;
-using WWWisky.quests.core.quests.types;
 
-namespace WWWisky.quests.core.quests
+namespace WWWisky.quests.core
 {
     /// <summary>
     /// 
@@ -12,7 +11,7 @@ namespace WWWisky.quests.core.quests
 		
         public string ID { get; }
 		public string Name { get; }
-        public IQuestType Type { get; }
+        public QuestType Type { get; }
         public CompletionState CompletionState { get; private set; }
 
         private Action _onCompleted;
@@ -24,7 +23,7 @@ namespace WWWisky.quests.core.quests
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="type"></param>
-        public Quest(string id, string name, IQuestType type)
+        public Quest(string id, string name, QuestType type)
 		{
             ID = id;
 			Name = name;

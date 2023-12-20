@@ -1,30 +1,33 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using WWWisky.quests.core.quests;
 
-namespace WWWisky.quests.core.components
+namespace WWWisky.quests.core
 {
     /// <summary>
     /// 
     /// </summary>
-    public class QuestBoard
+    public class QuestBoard : IQuestBoard
     {
         public event Action<IQuest> OnQuestAdded;
         public event Action<IQuest> OnQuestRemoved;
 
         public string Name { get; }
-        private readonly List<IQuest> m_QuestList;
+
+        private readonly List<IQuest> _questList;
+
+        public int QuestCount => _questList.Count;
 
 
-        public QuestBoard(string boardName)
+        public QuestBoard(string name)
         {
-            Name = boardName;
-            m_QuestList = new List<IQuest>();
+            Name = name;
+            _questList = new List<IQuest>();
         }
 
 
-        public IEnumerable<IQuest> GetQuests() => m_QuestList;
-        public int GetQuestCount() => m_QuestList.Count;
+        public IEnumerable<IQuest> GetQuests() => _questList;
+        public int GetQuestCount() => _questList.Count;
 
 
         public void AddQuest(IQuest quest)
@@ -32,7 +35,7 @@ namespace WWWisky.quests.core.components
             if (quest == null)
                 return;
 
-            m_QuestList.Add(quest);
+            _questList.Add(quest);
             OnQuestAdded?.Invoke(quest);
         }
         public void RemoveQuest(IQuest quest)
@@ -40,8 +43,18 @@ namespace WWWisky.quests.core.components
             if (quest == null)
                 return;
 
-            m_QuestList.Remove(quest);
+            _questList.Remove(quest);
             OnQuestRemoved?.Invoke(quest);
+        }
+
+        public IEnumerator<IQuest> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }

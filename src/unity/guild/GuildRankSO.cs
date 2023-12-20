@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using WWWisky.quests.core.guild;
+using WWWisky.quests.core;
 
 namespace WWWisky.quests.unity
 {

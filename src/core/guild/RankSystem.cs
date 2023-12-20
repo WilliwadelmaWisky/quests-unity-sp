@@ -1,6 +1,4 @@
-﻿using WWWisky.quests.core.util;
-
-namespace WWWisky.quests.core.guild
+﻿namespace WWWisky.quests.core
 {
     /// <summary>
     /// 

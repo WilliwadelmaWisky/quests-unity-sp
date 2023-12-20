@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WWWisky.quests.core.quests.types;
 
-namespace WWWisky.quests.core.quests
+namespace WWWisky.quests.core
 {
     /// <summary>
     /// 
@@ -22,7 +21,7 @@ namespace WWWisky.quests.core.quests
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="type"></param>
-        public StagedQuest(string id, string name, IQuestType type) : base(id, name, type)
+        public StagedQuest(string id, string name, QuestType type) : base(id, name, type)
         {
             _stageList = new List<Stage>();
             _stageIndex = 0;

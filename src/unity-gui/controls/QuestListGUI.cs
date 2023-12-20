@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using WWWisky.quests.core.quests;
+using WWWisky.quests.core;
 
 namespace WWWisky.quests.unity.gui
 {

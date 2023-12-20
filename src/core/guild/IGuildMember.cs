@@ -1,4 +1,4 @@
-﻿namespace WWWisky.quests.core.guild
+﻿namespace WWWisky.quests.core
 {
     /// <summary>
     /// 

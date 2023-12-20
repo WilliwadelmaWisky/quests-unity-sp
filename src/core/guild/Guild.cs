@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WWWisky.quests.core.guild
+namespace WWWisky.quests.core
 {
     /// <summary>
     /// 

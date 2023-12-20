@@ -3,8 +3,10 @@
     /// <summary>
     /// 
     /// </summary>
-    public interface ITrackable
+    public enum QuestType
     {
-        Vector GetPosition();
+        Main_Quest,
+        Side_Quest,
+        Event
     }
 }

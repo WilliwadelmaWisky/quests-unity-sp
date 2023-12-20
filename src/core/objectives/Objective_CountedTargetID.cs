@@ -1,8 +1,6 @@
 ﻿using System;
-using WWWisky.quests.core.quests;
-using WWWisky.quests.core.util;
 
-namespace WWWisky.quests.core.objectives
+namespace WWWisky.quests.core
 {
     /// <summary>
     /// 
