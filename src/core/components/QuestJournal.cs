@@ -34,20 +34,7 @@ namespace WWWisky.quests.core
 
         public IEnumerator<IQuest> GetEnumerator() => _questList.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-
         public bool Contains(IQuest quest) => _questIDSet.Contains(quest.ID);
-
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="onLoop"></param>
-		public void ForEach(Action<IQuest, int> onLoop)
-        {
-			for (int i = 0; i < QuestCount; i++)
-				onLoop(_questList[i], i);
-        }
 		
 		
 		/// <summary>
@@ -61,6 +48,7 @@ namespace WWWisky.quests.core
 				return false;
 			
 			quest.Start(OnQuestCompleted);
+            _activeQuestList.Add(quest);
 			_questList.Add(quest);
 			_questIDSet.Add(quest.ID);
 
@@ -74,8 +62,7 @@ namespace WWWisky.quests.core
 		/// <param name="quest"></param>
 		private void RemoveQuest(IQuest quest)
         {
-			_questList.Remove(quest);
-			_questIDSet.Remove(quest.ID);
+			_activeQuestList.Remove(quest);
 
 			OnQuestRemoved?.Invoke(quest);
 		}
@@ -114,9 +101,9 @@ namespace WWWisky.quests.core
 		/// </summary>
 		private void OnQuestCompleted()
         {
-			for (int i = QuestCount - 1; i >= 0; i--)
+			for (int i = _activeQuestList.Count; i >= 0; i--)
             {
-				IQuest quest = _questList[i];
+				IQuest quest = _activeQuestList[i];
 				if (quest.CompletionState == CompletionState.Active)
 					continue;
 

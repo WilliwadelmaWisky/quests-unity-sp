@@ -30,6 +30,7 @@ namespace WWWisky.quests.unity.gui
         {
             questGUI.Clear();
             questGUI.Assign(quest);
+            questGUI.transform.SetParent(transform);
             _questList.Add(questGUI);
         }
 
@@ -70,6 +71,10 @@ namespace WWWisky.quests.unity.gui
         {
             List<QuestGUI> questList = new List<QuestGUI>(_questList);
             _questList.Clear();
+
+            foreach (QuestGUI questGUI in questList)
+                questGUI.Clear();
+
             return questList;
         }
     }

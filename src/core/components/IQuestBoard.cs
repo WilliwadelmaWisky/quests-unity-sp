@@ -7,6 +7,7 @@ namespace WWWisky.quests.core
     /// </summary>
     public interface IQuestBoard : IEnumerable<IQuest>
     {
+        string Name { get; }
         int QuestCount { get; }
     }
 }

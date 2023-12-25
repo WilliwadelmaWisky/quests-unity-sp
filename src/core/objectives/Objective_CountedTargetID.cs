@@ -18,12 +18,12 @@ namespace WWWisky.quests.core
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="creatureID"></param>
-        /// <param name="amount"></param>
-        public Objective_CountedTargetID(string id, string name, string creatureID, int amount) : base(id, name, creatureID)
+        /// <param name="targetID"></param>
+        /// <param name="targetAmount"></param>
+        public Objective_CountedTargetID(string id, string name, string targetID, int targetAmount) : base(id, name, targetID)
         {
 			_defaultName = name;
-            Total = Math.Max(amount, 1);
+            Total = Math.Max(targetAmount, 1);
             Current = 0;
             UpdateName();
         }

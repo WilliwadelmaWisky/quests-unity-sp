@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
 using WWWisky.quests.core;
@@ -8,15 +9,16 @@ namespace WWWisky.quests.unity.gui
     /// <summary>
     /// 
     /// </summary>
-    public class QuestJournalGUI : MonoBehaviour
+    public class QuestBoardGUI : MonoBehaviour
     {
         [SerializeField] private QuestGUI QuestPrefab;
         [SerializeField] private QuestListGUI QuestList;
         [Header("Optional")]
+        [SerializeField] private TextMeshProUGUI NameText;
         [SerializeField] private QuestCategoryGUI QuestCategory;
         [SerializeField] private QuestInfoGUI QuestInfo;
 
-        private IQuestJournal _questJournal;
+        private IQuestBoard _questBoard;
         private IObjectPool<QuestGUI> _questPool;
 
 
@@ -32,10 +34,11 @@ namespace WWWisky.quests.unity.gui
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="questJournal"></param>
-        public void Assign(IQuestJournal questJournal)
+        /// <param name="questBoard"></param>
+        public void Assign(IQuestBoard questBoard)
         {
-            _questJournal = questJournal;
+            _questBoard = questBoard;
+            NameText?.SetText(questBoard.Name);
             QuestInfo?.Hide();
 
             Refresh();
@@ -53,7 +56,7 @@ namespace WWWisky.quests.unity.gui
         public void Refresh(Predicate<IQuest> match)
         {
             QuestList.Clear().ForEach(questGUI => _questPool.Release(questGUI));
-            _questJournal.ForEach((quest, index) =>
+            _questBoard.ForEach((quest, index) =>
             {
                 if (match(quest))
                     CreateQuest(quest, index);

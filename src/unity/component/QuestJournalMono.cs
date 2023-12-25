@@ -33,6 +33,8 @@ namespace WWWisky.quests.unity
             if (!_questJournal.Add(quest))
                 return;
 
+            Debug.Log("Quest added: " + quest.Name);
+
             if (_questJournal.QuestCount > 1 || _questTracker.IsTracking)
                 return;
 
@@ -75,6 +77,16 @@ namespace WWWisky.quests.unity
                 _questTracker.Track(q);
                 return;
             });
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Access()
+        {
+            Event_AccessQuestJournal e = new Event_AccessQuestJournal(this, _questJournal);
+            EventSystem.Current.Broadcast(e);
         }
     }
 }
